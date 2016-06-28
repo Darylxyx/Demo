@@ -2091,9 +2091,9 @@
 		wx.config({
 			debug: true,
 			appId: 'wxb5594e9daab47283',
-			timestamp: '1467020146',
-			nonceStr: 'xH4b8zvRAUcjB3T',
-			signature: '64c3a6bf9e04909151e52a8bc1bb745d7a82b66b',
+			timestamp: '1467079667',
+			nonceStr: 'O9WcHSjoN7fc0wx',
+			signature: 'd361b6adf34fbd0596b797660c9ca801e11e0921',
 			jsApiList: ['chooseImage']
 		});
 
