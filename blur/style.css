@@ -4,8 +4,8 @@ html, body, div, h1, h2, h3, h4, h5, h6, p, span, img, input {
 }
 
 html, body {
-	font-size: 20px;
-	font-family: '思源黑体简','Helvetica Neue-Light';
+	font-size: 19px;
+	font-family: 'Verdana','Arial';
 }
 
 .container {
@@ -13,7 +13,7 @@ html, body {
 	height: 100%;
 	position: relative;
 	background-image: url(./resource/images/bg1.jpg);
-	background-position: left top;
+	background-position: center top;
 	background-size: cover;
 }
 
@@ -25,10 +25,10 @@ html, body {
 	left: 50%;
 	margin-top: -200px;
 	margin-left: -400px;
-	border-radius: 6px;
+	border-radius: 8px;
 	box-shadow: 0 10px 20px rgba(0,0,0,0.5);
 	overflow: hidden;
-	z-index: 1;
+	z-index: 2;
 	padding: 50px;
 	box-sizing: border-box;
 }
@@ -40,15 +40,15 @@ html, body {
 	left: 0;
 	right: 0;
 	bottom: 0;
-	-webkit-filter: blur(20px);
-	-moz-filter: blur(20px);
-	-ms-filter: blur(20px);
-	-o-filter: blur(20px);
-	filter: blur(20px);
-	z-index: -1;
+	-webkit-filter: blur(10px);
+	-moz-filter: blur(10px);
+	-ms-filter: blur(10px);
+	-o-filter: blur(10px);
+	filter: blur(10px);
+	z-index: -3;
 	margin: -30px;
 	background-image: url(./resource/images/bg1.jpg);
-	background-position: left top;
+	background-position: center top;
 	background-size: cover;
 	background-attachment: fixed;
 }
@@ -60,4 +60,11 @@ html, body {
 
 .content p {
 	line-height: 1.7;
+}
+
+.text {
+	position: absolute;
+	top: 108px;
+	left: 500px;
+	z-index: 1;
 }
