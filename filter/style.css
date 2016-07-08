@@ -77,9 +77,9 @@ ul, ol, li {
 	-ms-transform-origin: center 60%;
 	-o-transform-origin: center 60%;
 	transform-origin: center 60%;
-	-webkit-transform: scale(1.2) rotateY(360deg);
-	-moz-transform: scale(1.2) rotateY(360deg);
-	-ms-transform: scale(1.2) rotateY(360deg);
-	-o-transform: scale(1.2) rotateY(360deg);
-	transform: scale(1.2) rotateY(360deg);
+	-webkit-transform: scale(1.2) rotateY(180deg);
+	-moz-transform: scale(1.2) rotateY(180deg);
+	-ms-transform: scale(1.2) rotateY(180deg);
+	-o-transform: scale(1.2) rotateY(180deg);
+	transform: scale(1.2) rotateY(180deg);
 }
