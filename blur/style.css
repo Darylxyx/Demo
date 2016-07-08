@@ -6,6 +6,7 @@ html, body, div, h1, h2, h3, h4, h5, h6, p, span, img, input {
 html, body {
 	font-size: 19px;
 	font-family: 'Verdana','Arial';
+	color: rgba(0,0,0,0.8);
 }
 
 .container {
@@ -28,7 +29,7 @@ html, body {
 	border-radius: 8px;
 	box-shadow: 0 10px 20px rgba(0,0,0,0.5);
 	overflow: hidden;
-	z-index: 2;
+	z-index: 1;
 	padding: 50px;
 	box-sizing: border-box;
 }
@@ -40,12 +41,12 @@ html, body {
 	left: 0;
 	right: 0;
 	bottom: 0;
-	-webkit-filter: blur(10px);
-	-moz-filter: blur(10px);
-	-ms-filter: blur(10px);
-	-o-filter: blur(10px);
-	filter: blur(10px);
-	z-index: -3;
+	-webkit-filter: blur(20px);
+	-moz-filter: blur(20px);
+	-ms-filter: blur(20px);
+	-o-filter: blur(20px);
+	filter: blur(20px);
+	z-index: -1;
 	margin: -30px;
 	background-image: url(./resource/images/bg1.jpg);
 	background-position: center top;
