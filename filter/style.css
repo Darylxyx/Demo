@@ -71,11 +71,11 @@ ul, ol, li {
 }
 
 .container li:hover .card {
-	-webkit-filter: none;
-	-moz-filter: none;
-	-ms-filter: none;
-	-o-filter: none;
-	filter: none;
+	-webkit-filter: saturate(0.5);
+	-moz-filter: saturate(0.5);
+	-ms-filter: saturate(0.5);
+	-o-filter: saturate(0.5);
+	filter: saturate(0.5);
 	-webkit-transform-origin: center 60%;
 	-moz-transform-origin: center 60%;
 	-ms-transform-origin: center 60%;
