@@ -13,6 +13,10 @@ ul, ol {
 	list-style-type: none;
 }
 
+a {
+	text-decoration: none;
+}
+
 .l {
 	float: left;
 }
@@ -41,8 +45,8 @@ ul, ol {
 	overflow: hidden;
 	background-image: url(./images/root-bg.jpg);
 	background-position: top center;
-/*	display: none;
-*/}
+	display: none;
+}
 
 .start {
 	display: block;
@@ -69,8 +73,13 @@ ul, ol {
 	left: 0;
 	bottom: 115px;
 	background-color: rgba(255,255,255,0.3);
-	box-shadow: inset 0 0 20px 8px #fff;
-	background-image: url(./images/face.jpg);
+	box-shadow: inset 0 30px 20px -20px #fff, inset 0 -30px 20px -20px #fff;
+	overflow: hidden;
+}
+
+.photo-area img {
+	float: left;
+	width: 100%;
 }
 
 .photo-contral {
@@ -109,9 +118,27 @@ ul, ol {
 	display: none;
 }
 
+.pop-share {
+	position: fixed;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	z-index: 3;
+	background-color: rgba(0,0,0,0.9);
+	display: none;
+}
+
+.pop-share img {
+	position: absolute;
+	top: 0;
+	right: 10px;
+	width: 53.1%;
+}
+
 .vs-area {
 	width: 100%;
-	margin-top: 36%;
+	margin-top: 41%;
 	text-align: center;
 	position: relative;
 	vertical-align: middle;
@@ -127,17 +154,35 @@ ul, ol {
 }
 
 .box-a {
+	width: 29.4%;
+	padding-bottom: 29.4%;
+}
+
+.box-b {
+	width: 29.4%;
+	padding-bottom: 29.4%;
+	background-image: url(./images/angelababy.jpg);
+}
+
+.box div {
+	position: absolute;
+	left: -9%;
+	top: -9%;
+	bottom: -9%;
+	right: -9%;
+}
+
+.box-a div {
 	background-image: url(./images/box-a.png);
 }
 
-
-.box-b {
+.box-b div {
 	background-image: url(./images/box-b.png);
 }
 
 .vs {
 	width: 12.8%;
-	margin: 0 1% 10% 1%;
+	margin: 0 3% 8% 3%;
 }
 
 .text {
@@ -184,6 +229,16 @@ ul, ol {
 	background-image: url(./images/box-2.png);
 }
 
+.box p {
+	text-align: center;
+	color: #fff;
+	font-size: 15px;
+	width: 100%;
+	position: absolute;
+	bottom: 0;
+	margin-bottom: 18%;
+}
+
 .btn {
 	display: block;
 	width: 57.3%;
@@ -217,6 +272,7 @@ ul, ol {
 	background-image: -o-linear-gradient(left, #50e7f7, #008ad4);
 	background-image: linear-gradient(left, #50e7f7, #008ad4);
 	color: #fff;
+	position: relative;
 }
 
 .rank-list ul {
@@ -355,7 +411,7 @@ ul, ol {
 	padding-bottom: 65%;
 	background-color: #f7f7f7;
 	margin-bottom: 18px;
-	background-image: url(./images/face.jpg);
+	background-image: url(./images/angelababy.jpg);
 }
 
 .star-desc {
@@ -378,4 +434,26 @@ ul, ol {
 .start-btn {
 	margin-top: 8.8%;
 	margin-bottom: 10.4%;
+}
+
+.rank-title-2::after {
+	content: '';
+	width: 0;
+	height: 25px;
+	border-left: 1px solid #fff;
+	position: absolute;
+	left: 50%;
+	top: 12px;
+}
+
+.rank-title-2 div {
+	width: 50%;
+	height: 100%;
+	font-size: 16px;
+	font-weight: normal;
+}
+
+.active {
+	font-size: 20px !important;
+	font-weight: bold !important;
 }
