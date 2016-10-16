@@ -19,5 +19,29 @@
 		</ul>
 	</div>
 	<div class="bg"></div>
+	<script>
+		var a = 100;
+
+		var b = function() {
+
+		};
+
+		b();
+
+		function b() {
+			// console.log(a); //100
+			// a = 10;
+			// var a = 100;
+			// console.log(a); //100
+			var a;
+			console.log(a); //undefined
+			a = 10; //10
+			a = 100; //100
+			console.log(a); //100
+		}
+
+		console.log(a); //100
+
+	</script>
 </body>
 </html>
