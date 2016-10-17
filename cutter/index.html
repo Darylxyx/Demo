@@ -9,21 +9,23 @@
 	<link rel="stylesheet" href="./src/style.css">
 </head>
 <body>
-	<div class="page page-root">
-		<input id="files" type="file"/>
-		<label for="files">
-			<p class="choose">Choose Image</p>
-		</label>
+	<div class="container">
+		<div class="page page-root">
+			<input id="files" type="file"/>
+			<label for="files">
+				<p class="choose">Choose Image</p>
+			</label>
+		</div>
+		<div class="page page-choose">
+			<div class="pic-area"></div>
+			<p class="submit-btn">Complete</p>
+		</div>
+		<div class="page page-result">
+			<div class="show-area"></div>
+		</div>
 	</div>
-	<div class="page page-choose">
-		<div class="pic-area"></div>
-		<p class="submit-btn">Complete</p>
-	</div>
-	<div class="page page-result">
-		<div class="show-area"></div>
-	</div>
-
-<script src="./src/hammer.js"></script>
+	
+<script src="./cutter/hammer.js"></script>
 <script src="./cutter/cutter.js"></script>
 <script src="./src/index.js"></script>
 </body>

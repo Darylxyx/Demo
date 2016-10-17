@@ -17,6 +17,15 @@ p {
 	text-align: center;
 }
 
+.container {
+	width: 100%;
+	max-width: 500px;
+	height: 100%;
+	margin: 0 auto;
+	position: relative;
+	overflow: hidden;
+}
+
 .page {
 	width: 100%;
 	height: 100%;
@@ -66,6 +75,6 @@ p {
 	background-repeat: no-repeat;
 	background-position: center;
 	background-size: cover;
-	border-radius: 10px;
+	border-radius: 6  px;
 	box-shadow: 0 0 10px 2px rgba(255,255,255,0.6);
 }
