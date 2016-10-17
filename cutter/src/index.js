@@ -7,10 +7,6 @@ window.onload = function() {
 		this.picAreaDom = doc.querySelector('.pic-area');
 		this.submitBtnDom = doc.querySelector('.submit-btn');
 		this.showAreaDom = doc.querySelector('.show-area');
-
-		this.picAreaWidth = document.body.clientWidth;
-		this.picAreaHeight = this.picAreaWidth * 1.3;
-		this.picAreaRate = this.picAreaWidth / this.picAreaHeight;
 	}
 
 	SubType.prototype = {
@@ -22,7 +18,7 @@ window.onload = function() {
 			var reader = new FileReader(),
 				_this = this;
 			reader.readAsDataURL(files);
-			
+
 			reader.onload = function() {
 				_this.chooseComplete(reader.result);
 			};
@@ -33,7 +29,7 @@ window.onload = function() {
 			this.cutter = new Cutter(this.picAreaDom, {
 				imgUrl: url,
 				conWidth: document.body.clientWidth,
-				conHeight: document.body.clientWidth * 1.3,
+				conHeight: document.body.clientWidth * 1.2,
 				speed: 2,
 				callback: function() {
 					_this.turnPage(1);
