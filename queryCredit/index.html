@@ -6,7 +6,7 @@
     <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1">
 	<title>睿码实信</title>
-	<link rel="stylesheet" href="./bundle.css?v=1479868231795">
+	<link rel="stylesheet" href="./bundle.css?v=1479889340411">
 </head>
 <body>
 <div id="container">
@@ -19,9 +19,9 @@
 			<div>
 				<input v-model="password" type="text" placeholder="请输入密码" />
 			</div>
-			<div>
-				<img class="code" src="./src/images/bg.jpg" />
-				<span class="another">换一张</span>
+			<div v-if="codeFlag">
+				<img class="code" v-bind:src="codeImgUrl" />
+				<span class="another" v-on:click="queryCode">换一张</span>
 			</div>
 			<div>
 				<input v-model="code" style="width:30%;" type="text" placeholder="验证码" />
@@ -43,12 +43,12 @@
 	</div>
 	<div v-show="currentPage==2" class="page page-result">
 		<h1 class="title">查询结果</h1>
-		<div class="score">98分</div>
+		<div class="score">{{creditScore}}分</div>
 	</div>
 	<div class="toast" v-bind:class="{active: isActive}">
 		<div>{{errorMsg}}</div>
 	</div>
 </div>
-<script src="./bundle.js?v=1479868231795"></script>
+<script src="./bundle.js?v=1479889340411"></script>
 </body>
 </html>
