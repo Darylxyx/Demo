@@ -5,35 +5,50 @@
     <meta name="description" content="">
     <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1">
-	<title>信用查询</title>
-	<link rel="stylesheet" href="./bundle.css?v=1479193475183">
+	<title>睿码实信</title>
+	<link rel="stylesheet" href="./bundle.css?v=1479868231795">
 </head>
 <body>
-
-	<div class="page page-login" style="display:block">
-		<h1 class="title">信用查询系统</h1>
+<div id="container">
+	<div v-show="currentPage==0" class="page page-login">
+		<h1 class="title">睿码实信</h1>
 		<div class="form-box">
 			<div>
-				<input type="text" placeholder="请输入用户名" />
+				<input v-model="username" v-on:blur="queryCode" type="text" placeholder="请输入用户名" />
 			</div>
 			<div>
-				<input type="text" placeholder="请输入密码" />
+				<input v-model="password" type="text" placeholder="请输入密码" />
 			</div>
 			<div>
 				<img class="code" src="./src/images/bg.jpg" />
 				<span class="another">换一张</span>
 			</div>
 			<div>
-				<input style="width:30%;" type="text" placeholder="验证码" />
+				<input v-model="code" style="width:30%;" type="text" placeholder="验证码" />
 			</div>
-			<div class="btn">登录</div>
+			<div class="btn login" v-on:click="login">登录</div>
 		</div>
 	</div>
-	<div class="page page-result">
+	<div v-show="currentPage==1" class="page page-search">
+		<h1 class="title">查询</h1>
+		<div class="form-box">
+			<div>
+				<input v-model="idcard" type="text" placeholder="请输入身份证号" />
+			</div>
+			<div>
+				<input v-model="phone" type="text" placeholder="请输入手机号" />
+			</div>
+			<div class="btn search" v-on:click="queryInfo">查询</div>
+		</div>
+	</div>
+	<div v-show="currentPage==2" class="page page-result">
 		<h1 class="title">查询结果</h1>
 		<div class="score">98分</div>
 	</div>
-
-<script src="./bundle.js?v=1479193475183"></script>
+	<div class="toast" v-bind:class="{active: isActive}">
+		<div>{{errorMsg}}</div>
+	</div>
+</div>
+<script src="./bundle.js?v=1479868231795"></script>
 </body>
 </html>
