@@ -6,7 +6,7 @@
     <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1">
 	<title>睿码实信</title>
-	<link rel="stylesheet" href="./bundle.css?v=1479890310289">
+	<link rel="stylesheet" href="./bundle.css?v=1479897535759">
 </head>
 <body>
 <div id="container">
@@ -44,11 +44,12 @@
 	<div v-show="currentPage==2" class="page page-result">
 		<h1 class="title">查询结果</h1>
 		<div class="score">{{creditScore}}分</div>
+		<div class="btn" style="width:100px;margin:0 auto;" v-on:click="queryAgain">返回</div>
 	</div>
 	<div class="toast" v-bind:class="{active: isActive}">
 		<div>{{errorMsg}}</div>
 	</div>
 </div>
-<script src="./bundle.js?v=1479890310289"></script>
+<script src="./bundle.js?v=1479897535759"></script>
 </body>
 </html>
