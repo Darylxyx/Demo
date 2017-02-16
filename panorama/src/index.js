@@ -1,5 +1,6 @@
 function SubType() {
 	this.$container = document.querySelector('#container');
+	this.$loading = document.querySelector('.loading');
 	this.I = 0;
 	this.J = 0;
 	this.rowNum = 10;
@@ -13,13 +14,15 @@ function SubType() {
 SubType.prototype = {
 	init: function() {
 		var img = new Image(),
-			url = './src/Group.jpg',
+			url = './src/images/Group.jpg',
 			_this = this;
 
 		img.onload = function() {
 			_this.$container.style.backgroundImage = 'url('+url+')';
 
 			var hammer = new Hammer(_this.$container);
+
+			_this.$loading.style.display = 'none';
 
 			hammer.on('pan', function(e) {
 				// console.log(e);
