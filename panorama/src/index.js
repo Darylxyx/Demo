@@ -26,7 +26,9 @@ SubType.prototype = {
 
 			hammer.on('pan', function(e) {
 				// console.log(e);
-
+				
+				if (e.deltaX % 2 != 0) return;
+				 
 				if (e.deltaX > _this.prevX) {
 					_this.rotate('anti');
 				} else {
