@@ -31,8 +31,10 @@ window.onload = function() {
 	];
 
 	var listType = 1,
-		bannerDom = document.getElementsByClassName('banner')[0],
-		contentDom = document.getElementsByClassName('content')[0];
+		bannerDom = document.querySelector('.banner'),
+		contentDom = document.querySelector('.content'),
+		loadMoreDom = document.querySelector('.load-more'),
+		wtf = null;
 
 	showList();
 
@@ -42,9 +44,13 @@ window.onload = function() {
 		showList();
 	}
 
+	loadMoreDom.onclick = function() {
+		wtf.create(dataArr);
+	}
+
 	function showList() {
 		contentDom.innerHTML = '';
-		var wtf = new WaterFull('.content', {
+		wtf = new WaterFull('.content', {
 			type: listType,
 			urlField: 'picUrl'
 		});
