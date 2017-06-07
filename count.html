@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="pragma" content="no-cache"> 
+    <meta http-equiv="Cache-Control " content="no-cache,must-revalidate"> 
+    <meta name="description" content="">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1">
+	<title>排列计算</title>
+	<style>
+		input {
+			width: 75%;
+			height: 40px;
+			font-size: 16px;
+			border: 1px solid black;
+			float: left;
+			box-sizing: border-box;
+			outline: none;
+		}
+		#button {
+			width: 20%;
+			height: 40px;
+			float: right;
+			background-color: #2E90E3;
+			color: #fff;
+			text-align: center;
+			line-height: 40px;
+		}
+		.clear {
+			clear: both;
+		}
+		span {
+			word-break:break-all;
+		}
+	</style>
+</head>
+<body>
+<input id='input' type='text' placeholder='请将元素以 "," 分割' />
+<div id='button'>计算</div>
+<div class='clear'></div>
+<br/>
+<span>2元素：</span><span id='list-2'></span>
+<br/>
+<br/>
+<span>3元素：</span><span id='list-3'></span>
+<script>
+window.onload = function() {
+	var oInput = document.querySelector('#input'),
+		oButton = document.querySelector('#button'),
+		list2 = document.querySelector('#list-2'),
+		list3 = document.querySelector('#list-3');
+
+	oButton.onclick = function() {
+		var valArr = oInput.value.split(',');
+		list2.innerHTML = count2(valArr);
+		list3.innerHTML = count3(valArr);
+	};
+
+	function count2(valArr) {
+		var arr = [];
+		valArr.forEach(function(item, index) {
+			valArr.forEach(function(item1, index1) {
+				if (item == item1) return;
+				var str = String(item) + String(item1);
+				arr.push(str);
+			});
+		});
+		console.log(arr);
+		return arr;
+	}
+
+	function count3(valArr) {
+		var arr = [];
+		valArr.forEach(function(item, index) {
+			valArr.forEach(function(item0, index0) {
+				if (item == item0) return;
+				valArr.forEach(function(item1, index1) {
+					if (item0 == item1 || item == item1) return;
+					var str = String(item) + String(item0) + String(item1);
+					arr.push(str);
+				});
+			});
+		});
+		console.log(arr);
+		return arr;
+	}
+}
+
+
+</script>
+</body>
+</html>
