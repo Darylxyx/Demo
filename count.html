@@ -32,17 +32,18 @@
 		span {
 			word-break:break-all;
 		}
+		h3 {
+			color: red;
+			margin: 10px 0;
+		}
 	</style>
 </head>
 <body>
 <input id='input' type='text' placeholder='请将元素以 "," 分割' />
 <div id='button'>计算</div>
 <div class='clear'></div>
-<br/>
-<span>2元素：</span><span id='list-2'></span>
-<br/>
-<br/>
-<span>3元素：</span><span id='list-3'></span>
+<h3>2元素：</h3><span id='list-2'></span>
+<h3>3元素：</h3><span id='list-3'></span>
 <script>
 window.onload = function() {
 	var oInput = document.querySelector('#input'),
@@ -57,12 +58,12 @@ window.onload = function() {
 	};
 
 	function count2(valArr) {
-		var arr = [];
+		var arr = '';
 		valArr.forEach(function(item, index) {
 			valArr.forEach(function(item1, index1) {
 				if (item == item1) return;
 				var str = String(item) + String(item1);
-				arr.push(str);
+				arr += str + '<br/>';
 			});
 		});
 		console.log(arr);
@@ -70,14 +71,14 @@ window.onload = function() {
 	}
 
 	function count3(valArr) {
-		var arr = [];
+		var arr = '';
 		valArr.forEach(function(item, index) {
 			valArr.forEach(function(item0, index0) {
 				if (item == item0) return;
 				valArr.forEach(function(item1, index1) {
 					if (item0 == item1 || item == item1) return;
 					var str = String(item) + String(item0) + String(item1);
-					arr.push(str);
+					arr += str + '<br/>';
 				});
 			});
 		});
