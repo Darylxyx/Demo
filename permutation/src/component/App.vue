@@ -92,7 +92,7 @@ module.exports = {
 .input-control {
 	/*width: 90%;*/
 	height: 40px;
-	margin: 15px;
+	margin: 50px 15px 15px 15px;
 	/*background-color: red;*/
 }
 
