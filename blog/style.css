@@ -126,7 +126,7 @@ ul, ol {
 #main {
 	/*width: 1200px;
 	margin: 0 auto;*/
-	padding: 60px 0 70px 0;
+	padding: 60px 0 0 0;
 }
 
 #homepage_top_pager {
@@ -179,6 +179,8 @@ ul, ol {
 }
 
 .topicListFooter, #homepage1_HomePageDays_homepage_bottom_pager {
+	width: 1200px;
+	margin: 0 auto;
 	text-align: right;
 	color: #4a4a4a;
 	font-size: 14px;
@@ -189,7 +191,9 @@ ul, ol {
 	color: #4a4a4a;
 }
 
-
+#nav_next_page, #homepage1_HomePageDays_homepage_bottom_pager {
+	padding-bottom: 70px;
+}
 
 /*sideBar*/
 
@@ -259,6 +263,10 @@ ul, ol {
 #blog-comments-placeholder > div, #comment_form > div {
 	width: 1200px;
 	margin: 0 auto;
+}
+
+#comment_form {
+	padding-bottom: 70px;
 }
 
 /*adver*/
