@@ -124,8 +124,8 @@ ul, ol {
 /*main*/
 
 #main {
-	width: 1200px;
-	margin: 0 auto;
+	/*width: 1200px;
+	margin: 0 auto;*/
 	padding: 60px 0 70px 0;
 }
 
@@ -134,7 +134,8 @@ ul, ol {
 }
 
 .day {
-	margin-bottom: 40px;
+	width: 1200px;
+	margin: 0 auto 40px auto;
 	border-bottom: 1px solid #ccc;
 }
 
@@ -180,6 +181,7 @@ ul, ol {
 .topicListFooter, #homepage1_HomePageDays_homepage_bottom_pager {
 	text-align: right;
 	color: #4a4a4a;
+	font-size: 14px;
 }
 
 .topicListFooter a, #homepage1_HomePageDays_homepage_bottom_pager a {
@@ -231,8 +233,36 @@ ul, ol {
 	text-decoration: none;
 }
 
+#customFooter ul a:hover, #customFooter ul a:active {
+	color: #fff;
+}
+
 #copyright {
 	font-size: 14px;
 	color: #707070;
 	margin-top: 56px;
+}
+
+/*page*/
+
+/*comment*/
+
+#topics {
+	width: 1200px;
+	margin: 0 auto;
+}
+
+#blog-comments-placeholder, #comment_form {
+	background-color: #EDEDED;
+}
+
+#blog-comments-placeholder > div, #comment_form > div {
+	width: 1200px;
+	margin: 0 auto;
+}
+
+/*adver*/
+
+#ad_t2, #opt_under_post, #cnblogs_c1, #under_post_news, #cnblogs_c2, #under_post_kb, #HistoryToday {
+	display: none;
 }
