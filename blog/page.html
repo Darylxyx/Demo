@@ -10,6 +10,588 @@
 	<link type='text/css' href='./style.css' />
 </head>
 <body>
-	<div class="container"></div>
+<a name="top"></a>
+
+<!--done-->
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+	<a id="lnkBlogLogo" href="http://www.cnblogs.com/ghost-xyx/"><img id="blogLogo" src="/Skins/custom/images/logo.gif" alt="返回主页"></a>			
+		
+<!--done-->
+<h1><a id="Header1_HeaderTitle" class="headermaintitle" href="http://www.cnblogs.com/ghost-xyx/">Daryl</a></h1>
+<h2></h2>
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+	<li><a id="blog_nav_sitehome" class="menu" href="http://www.cnblogs.com/">博客园</a></li>
+	<li><a id="blog_nav_myhome" class="menu" href="http://www.cnblogs.com/ghost-xyx/">首页</a></li>
+	<li><a href="http://news.cnblogs.com/">新闻</a></li>
+	<li><a id="blog_nav_newpost" class="menu" rel="nofollow" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">新随笔</a></li>
+	<li><a id="blog_nav_contact" accesskey="9" class="menu" rel="nofollow" href="https://msg.cnblogs.com/send/Daryl">联系</a></li>
+	<li><a id="blog_nav_admin" class="menu" rel="nofollow" href="https://i.cnblogs.com/">管理</a></li>
+	<li><a id="blog_nav_rss" class="menu" href="http://www.cnblogs.com/ghost-xyx/rss">订阅</a>
+	<a id="blog_nav_rss_image" class="aHeaderXML" href="http://www.cnblogs.com/ghost-xyx/rss"><img src="//www.cnblogs.com/images/xml.gif" alt="订阅"></a></li>
+</ul>
+
+
+		<div class="blogStats">
+			
+			<div id="blog_stats">
+<!--done-->
+随笔- 36&nbsp;
+文章- 0&nbsp;
+评论- 191&nbsp;
+</div>
+			
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		
+<div id="post_detail">
+<!--done-->
+<div id="topics">
+	<div class="post">
+		<h1 class="postTitle">
+			<a id="cb_post_title_url" class="postTitle2" href="http://www.cnblogs.com/ghost-xyx/p/6070146.html">自制一个H5图片拖拽、裁剪插件（原生JS）</a>
+		</h1>
+		<div class="clear"></div>
+		<div class="postBody">
+			<div id="cnblogs_post_body"><p><span style="font-family: &quot;Microsoft YaHei&quot;; font-size: 18px"><strong><span style="color: #000080">前言</span></strong></span></p>
+<p><span style="font-family: &quot;Microsoft YaHei&quot;">如今的H5运营活动中，有很多都是让用户拍照或者上传图片，然后对照片加滤镜、加贴纸、评颜值之类的。尤其是一些拍照软件公司的运营活动几乎全部都是这样的。</span></p>
+<p><span style="font-family: &quot;Microsoft YaHei&quot;">博主也做过不少，为了省事就封装了一个简单的图片拖拽、裁剪的插件。其实网上也有很多类似的插件，只不过有的功能冗余体积大，有的甚至还依赖jquery。索性自己搞一个轻量的，只是不支持缩放功能。</span></p>
+<p><span style="font-family: &quot;Microsoft YaHei&quot;"><a href="https://darylxyx.github.io/Demo/cutter/index.html" target="_blank">DEMO</a>（手机上看效果比较好，PC上没有兼容处理），<a href="https://github.com/Darylxyx/JavaScript-plugin/tree/master/cutter" target="_blank">原码</a></span></p>
+<p>&nbsp;</p>
+<p><span style="color: #000080; font-size: 18px; font-family: &quot;Microsoft YaHei&quot;"><strong>实现</strong></span></p>
+<p><span style="font-family: &quot;Microsoft YaHei&quot;">这里简略说下实现过程，只截取部分代码片段，有兴趣的可以看下原码，反正也很简单。</span></p>
+<p><span style="font-size: 16px; font-family: &quot;Microsoft YaHei&quot;"><strong>图片上传</strong></span></p>
+<p><span style="font-family: &quot;Microsoft YaHei&quot;">这个DEMO里使用的上传方式是HTML5的 File Input，但是很多运营活动需要调用微信的上传&amp;拍照接口，由于以前踩过坑这里就啰嗦两句，帮助新人绕开。</span></p>
+<p><span style="font-family: &quot;Microsoft YaHei&quot;">· 在 wx.config 中的 jsApiList 属性中添加&nbsp;chooseImage 和&nbsp;uploadImage API。</span></p>
+<p><span style="font-family: &quot;Microsoft YaHei&quot;">· 调用 chooseImage API，获得 localId。</span></p>
+<div class="cnblogs_code"><div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="//common.cnblogs.com/images/copycode.gif" alt="复制代码"></a></span></div>
+<pre><span style="color: #000000">wx.chooseImage({
+    count: </span>1, <span style="color: #008000">//</span><span style="color: #008000"> 默认9</span>
+    sizeType: ['original', 'compressed'<span style="color: #000000">],
+    sourceType: [</span>'album', 'camera'<span style="color: #000000">],
+    success: (res) </span>=&gt;<span style="color: #000000"> {
+        </span><span style="color: #0000ff">var</span> localIds = res.localIds[0<span style="color: #000000">];
+        console.log(localIds);
+    }
+});</span></pre>
+<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="//common.cnblogs.com/images/copycode.gif" alt="复制代码"></a></span></div></div>
+<p><span style="font-family: &quot;Microsoft YaHei&quot;">需要注意的是这里的 localId 可以通过 img 标签的 src 属性进行展示，但是无法传给服务器接口或者通过 canvas 裁剪，所以还需要上传一步。</span></p>
+<p><span style="font-family: &quot;Microsoft YaHei&quot;">· 调用&nbsp;uploadImage API，将之前得到的 localId 传入，获得 serverId。</span></p>
+<div class="cnblogs_code"><div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="//common.cnblogs.com/images/copycode.gif" alt="复制代码"></a></span></div>
+<pre><span style="color: #000000">wx.uploadImage({
+    localId: localIds,
+    isShowProgressTips: </span>1<span style="color: #000000">,
+    success: (res) </span>=&gt;<span style="color: #000000"> {
+        </span><span style="color: #0000ff">var</span> serverId =<span style="color: #000000"> res.serverId;
+        console.log(serverId);</span><span style="color: #000000">
+    }
+});</span></pre>
+<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="//common.cnblogs.com/images/copycode.gif" alt="复制代码"></a></span></div></div>
+<p><span style="font-family: &quot;Microsoft YaHei&quot;">有了 serverId 其实就可以得到保存在微信服务器上的图片了，只是博主之前还去多余的下载一道。</span></p>
+<p><span style="font-family: &quot;Microsoft YaHei&quot;">将一开始微信认证时获得的 accessToken&nbsp;与 serverId 拼接到下面的链接即可直接引用</span></p>
+<div class="cnblogs_code">
+<pre>const imgUrl = "http://file.api.weixin.qq.com/cgi-bin/media/get?access_token=" + accessToken + "&amp;media_id=" + serverId;</pre>
+</div>
+<p><span style="font-family: &quot;Microsoft YaHei&quot;">接下来就可以创建 image 对象，设置 src 属性，完成拖拽裁切等操作。</span></p>
+<p>&nbsp;</p>
+<p><span style="font-family: &quot;Microsoft YaHei&quot;"><strong><span style="font-size: 16px">初始化</span></strong></span></p>
+<p><span style="font-family: &quot;Microsoft YaHei&quot;">首先要对图片的尺寸进行调整：</span></p>
+<p><span style="font-family: &quot;Microsoft YaHei&quot;">· 若图片宽高比比容器的大，即图片比容器“扁”，就让图片的高度与容器保持一致，宽度自动适应保持原图比例不变</span></p>
+<p><span style="font-family: &quot;Microsoft YaHei&quot;">· 若图片宽高比比容器的小，即图片比容器“瘦”，就让图片的宽度与容器保持一致，高度自动适应保持原图比例不变</span></p>
+<p><span style="font-family: &quot;Microsoft YaHei&quot;">为了便于理解，我们假设容器高宽为1:1，为下图中红色线框区域：</span></p>
+<p><img src="http://images2015.cnblogs.com/blog/613712/201611/613712-20161117195407138-1280259640.jpg" alt="" width="405" height="253"></p>
+<p><img src="http://images2015.cnblogs.com/blog/613712/201611/613712-20161117195640920-643972344.jpg" alt="" width="253" height="380"></p>
+<p><span style="font-family: &quot;Microsoft YaHei&quot;">代码片段</span></p>
+<div class="cnblogs_code"><div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="//common.cnblogs.com/images/copycode.gif" alt="复制代码"></a></span></div>
+<pre><span style="color: #0000ff">var</span> img = <span style="color: #0000ff">new</span><span style="color: #000000"> Image(),
+    _this </span>= <span style="color: #0000ff">this</span><span style="color: #000000">;
+
+img.src </span>=<span style="color: #000000"> imgUrl;
+img.style.webkitUserSelect </span>= 'none'<span style="color: #000000">;
+
+img.onload </span>= <span style="color: #0000ff">function</span><span style="color: #000000">() {
+
+    </span><span style="color: #0000ff">var</span> imgWidth =<span style="color: #000000"> img.width,
+        imgHeight </span>=<span style="color: #000000"> img.height,
+        imgRate </span>= imgWidth /<span style="color: #000000"> imgHeight,
+        conRate </span>= <span style="color: #ff0000">conWidth</span> /<span style="color: #000000"><span style="color: #ff0000"> conHeight</span>;
+
+    </span><span style="color: #0000ff">if</span> (imgRate &gt; conRate) { <span style="color: #008000">//</span><span style="color: #008000">宽型</span>
+
+        <span style="color: #0000ff">var</span> imgCurrentHeight =<span style="color: #000000"> _this.opts.conHeight,
+            imgCurrentWidth </span>= imgCurrentHeight *<span style="color: #000000"> imgRate,
+            <span style="color: #ff0000">maxOffset </span></span>= <span style="color: #ff0000">conWidth</span> -<span style="color: #000000"> imgCurrentWidth;
+
+        img.setAttribute(</span>'width', 'auto'<span style="color: #000000">);
+        img.setAttribute(</span>'height'<span style="color: #000000">, _this.opts.conHeight);
+
+        </span><span style="color: #008000">//</span><span style="color: #008000">......</span>
+<span style="color: #000000">
+    } </span><span style="color: #0000ff">else</span> { <span style="color: #008000">//</span><span style="color: #008000">高型</span>
+
+        <span style="color: #0000ff">var</span> imgCurrentWidth =<span style="color: #000000"> _this.opts.conWidth,
+            imgCurrentHeight </span>= imgCurrentWidth /<span style="color: #000000"> imgRate,
+            <span style="color: #ff0000">maxOffset </span></span>= <span style="color: #ff0000">conHeight</span> -<span style="color: #000000"> imgCurrentHeight;
+
+        img.setAttribute(</span>'width', '100%'<span style="color: #000000">);
+
+        </span><span style="color: #008000">//</span><span style="color: #008000">......</span>
+<span style="color: #000000">    }
+}</span></pre>
+<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="//common.cnblogs.com/images/copycode.gif" alt="复制代码"></a></span></div></div>
+<p><span style="font-family: &quot;Microsoft YaHei&quot;">上述代码就完成了基本的图片大小调整，其中 conWidth, conHeight 是插件接收的容器高与宽，maxOffset 是图片允许拖拽的最大偏移量。</span></p>
+<p>&nbsp;</p>
+<p><span style="font-size: 16px; font-family: &quot;Microsoft YaHei&quot;"><strong>拖拽</strong></span></p>
+<p><span style="font-family: &quot;Microsoft YaHei&quot;">这里我使用了一个比较轻量的手势库——hammer.js，通过手势的位移改变图片的 translate 属性值。</span></p>
+<p><span style="font-family: &quot;Microsoft YaHei&quot;">这里只截取横向拖拽的代码片段，纵向类似</span></p>
+<div class="cnblogs_code"><div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="//common.cnblogs.com/images/copycode.gif" alt="复制代码"></a></span></div>
+<pre>hammer.on('pan', <span style="color: #0000ff">function</span><span style="color: #000000">(e) {
+    </span><span style="color: #0000ff">var</span> current = img.style.transform ? img.style.transform.split('(')[1].split('px')[0] : 0<span style="color: #000000">,
+    move </span>= Number(current) + (e.deltaX * (<span style="color: #ff0000">_this.opts.speed</span>/10));
+
+    <span style="color: #0000ff">if</span> (move &gt;= 0 || move &lt;=<span style="color: #000000"> maxOffset) {
+        </span><span style="color: #0000ff">return</span><span style="color: #000000">;
+    }
+
+    img.style.transform </span>= 'translateX('+move+'px)'<span style="color: #000000">;
+
+    <span style="color: #ff0000">_this.cutData.moveX </span></span>=<span style="color: #000000"> Math.abs(move);
+    <span style="color: #ff0000">_this.cutData.moveY </span></span>= 0<span style="color: #000000">;
+});</span></pre>
+<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="//common.cnblogs.com/images/copycode.gif" alt="复制代码"></a></span></div></div>
+<p><span style="font-family: &quot;Microsoft YaHei&quot;">opts.speed 值为插件初始化时设置的拖动速度，这里速度值算法比较简单，有兴趣的朋友可优化使其更平滑些。cutData 用于缓存拖动的位置，用于之后的裁剪。</span></p>
+<p>&nbsp;</p>
+<p><span style="font-size: 16px; font-family: &quot;Microsoft YaHei&quot;"><strong>裁剪</strong></span></p>
+<p><span style="font-family: &quot;Microsoft YaHei&quot;">这里使用了 canvas 对图片进行裁剪返回 base64码，可以将 base64码直接展示或者通过 POST 接口传到服务器处理（GET请求长度会超）</span></p>
+<div class="cnblogs_code"><div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="//common.cnblogs.com/images/copycode.gif" alt="复制代码"></a></span></div>
+<pre>cut: <span style="color: #0000ff">function</span><span style="color: #000000">() {
+</span><span style="color: #0000ff">　　var</span> canvas = document.createElement('canvas'<span style="color: #000000">),
+　　　　img </span>= document.querySelector('#cutImgObj'<span style="color: #000000">),
+　　　　data </span>= <span style="color: #0000ff">this</span><span style="color: #000000">.cutData,
+　　　　cutWidth </span>= <span style="color: #0000ff">this</span>.opts.conWidth /<span style="color: #000000"> data.scaleRate,
+　　　　cutHeight </span>= <span style="color: #0000ff">this</span>.opts.conHeight /<span style="color: #000000"> data.scaleRate;
+
+　　canvas.width </span>=<span style="color: #000000"> cutWidth;
+　　canvas.height </span>=<span style="color: #000000"> cutHeight;
+
+　　canvas.getContext(</span>'2d').drawImage(img, data.moveX/data.scaleRate, data.moveY/data.scaleRate, cutWidth, cutHeight, 0, 0<span style="color: #000000">, cutWidth, cutHeight);
+</span><span style="color: #0000ff">　　return</span> canvas.toDataURL('image/png'<span style="color: #000000">);
+},</span></pre>
+<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="//common.cnblogs.com/images/copycode.gif" alt="复制代码"></a></span></div></div>
+<p><span style="color: #ff0000; font-family: &quot;Microsoft YaHei&quot;">这里要说明下，由于图片进行了缩放，所以需要将画布调整到原图的尺寸，同时记录的拖动位置也需要除以缩放比例。</span></p>
+<p>&nbsp;</p>
+<p><span style="font-size: 18px; font-family: &quot;Microsoft YaHei&quot;"><strong><span style="color: #000080">调用</span></strong></span></p>
+<p><span style="font-family: &quot;Microsoft YaHei&quot;">· 初始化</span></p>
+<div class="cnblogs_code"><div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="//common.cnblogs.com/images/copycode.gif" alt="复制代码"></a></span></div>
+<pre><span style="color: #0000ff">var</span> cutter = <span style="color: #0000ff">new</span><span style="color: #000000"> Cutter(picAreaDom, {
+    imgUrl: url, <span style="color: #008000">//图片链接</span>
+    conWidth: <span style="color: #ff0000">containerDom</span>.offsetWidth, <span style="color: #008000">//容器宽度</span>
+    conHeight: <span style="color: #ff0000">containerDom</span>.offsetWidth </span>* 1.2<span style="color: #000000">, <span style="color: #008000">//容器高度</span>
+    speed: </span>2<span style="color: #000000">, <span style="color: #008000">//拖动速度</span>
+    callback: </span><span style="color: #0000ff">function</span><span style="color: #000000">() {
+        </span><span style="color: #008000">//</span><span style="color: #008000">doSomething...</span>
+<span style="color: #000000">    }
+});</span></pre>
+<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="//common.cnblogs.com/images/copycode.gif" alt="复制代码"></a></span></div></div>
+<p><span style="font-family: &quot;Microsoft YaHei&quot;">这里有个地方要说明下，虽然 Cutter 中的 conWidth,conHeight 属性默认为 picAreaDom 的宽高，但如果 picAreaDom 的父级元素为 display:none，那么就获取不到 picAreaDom 尺寸（DEMO中单页应用机制导致的），这时候就需要显式传入裁剪区域的宽高。</span></p>
+<p><span style="font-family: &quot;Microsoft YaHei&quot;">callback 为初始化完成时的回调函数，保存实例化对象 cutter，用于之后的裁剪。</span></p>
+<p><span style="font-family: &quot;Microsoft YaHei&quot;">· 裁剪</span></p>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff">var</span> result = cutter.cut();</pre>
+</div>
+<p><span style="font-family: &quot;Microsoft YaHei&quot;">result 值即为裁剪后的 base64码。</span></p>
+<p><span style="font-family: &quot;Microsoft YaHei&quot;">最后一个小提示，如果需要重新上传图片裁剪，记得将容器中的 img 对象移除。具体的细节可以参考原码，整体比较简单。</span></p>
+<p>&nbsp;</p>
+<p><span style="font-size: 16px"><strong><span style="font-family: &quot;Microsoft YaHei&quot;">感谢你的浏览，希望能有所帮助</span></strong></span></p></div><div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+<div id="BlogPostCategory"></div>
+<div id="EntryTag">标签: <a href="http://www.cnblogs.com/ghost-xyx/tag/JavaScript/">JavaScript</a></div>
+<div id="blog_post_info"><div id="green_channel">
+        <a href="javascript:void(0);" id="green_channel_digg" onclick="DiggIt(6070146,cb_blogId,1);green_channel_success(this,'谢谢推荐！');">好文要顶</a>
+            <a id="green_channel_follow" onclick="follow('177498ee-cdac-e311-8d02-90b11c0b17d6');" href="javascript:void(0);">关注我</a>
+    <a id="green_channel_favorite" onclick="AddToWz(cb_entryId);return false;" href="javascript:void(0);">收藏该文</a>
+    <a id="green_channel_weibo" href="javascript:void(0);" title="分享至新浪微博" onclick="ShareToTsina()"><img src="//common.cnblogs.com/images/icon_weibo_24.png" alt=""></a>
+    <a id="green_channel_wechat" href="javascript:void(0);" title="分享至微信" onclick="shareOnWechat()"><img src="//common.cnblogs.com/images/wechat.png" alt=""></a>
+</div>
+<div id="author_profile">
+    <div id="author_profile_info" class="author_profile_info">
+            <a href="http://home.cnblogs.com/u/ghost-xyx/" target="_blank"><img src="//pic.cnblogs.com/face/613712/20140316134803.png" class="author_avatar" alt=""></a>
+        <div id="author_profile_detail" class="author_profile_info">
+            <a href="http://home.cnblogs.com/u/ghost-xyx/">Daryl</a><br>
+            <a href="http://home.cnblogs.com/u/ghost-xyx/followees">关注 - 15</a><br>
+            <a href="http://home.cnblogs.com/u/ghost-xyx/followers">粉丝 - 125</a>
+        </div>
+    </div>
+    <div class="clear"></div>
+    <div id="author_profile_honor"></div>
+    <div id="author_profile_follow">
+    </div>
+</div>
+<div id="div_digg">
+    <div class="diggit" onclick="votePost(6070146,'Digg')">
+        <span class="diggnum" id="digg_count">2</span>
+    </div>
+    <div class="buryit" onclick="votePost(6070146,'Bury')">
+        <span class="burynum" id="bury_count">0</span>
+    </div>
+    <div class="clear"></div>
+    <div class="diggword" id="digg_tips">
+    </div>
+</div>
+</div>
+<div class="clear"></div>
+<div id="post_next_prev"><a href="http://www.cnblogs.com/ghost-xyx/p/6065070.html" class="p_n_p_prefix">« </a> 上一篇：<a href="http://www.cnblogs.com/ghost-xyx/p/6065070.html" title="发布于2016-11-15 16:43">微信小程序初体验与DEMO分享</a><br><a href="http://www.cnblogs.com/ghost-xyx/p/6380689.html" class="p_n_p_prefix">» </a> 下一篇：<a href="http://www.cnblogs.com/ghost-xyx/p/6380689.html" title="发布于2017-02-10 17:44">Vuex核心知识（2.0）</a><br></div>
+</div>
+
+
+		</div>
+		<div class="postDesc">posted @ <span id="post-date">2016-11-17 20:39</span> <a href="http://www.cnblogs.com/ghost-xyx/">Daryl</a> 阅读(<span id="post_view_count">2585</span>) 评论(<span id="post_comment_count">7</span>)  <a href="https://i.cnblogs.com/EditPosts.aspx?postid=6070146" rel="nofollow">编辑</a> <a href="#" onclick="AddToWz(6070146);return false;">收藏</a></div>
+	</div>
+	<script type="text/javascript">var allowComments=true,cb_blogId=179301,cb_entryId=6070146,cb_blogApp=currentBlogApp,cb_blogUserGuid='177498ee-cdac-e311-8d02-90b11c0b17d6',cb_entryCreatedDate='2016/11/17 20:39:00';loadViewCount(cb_entryId);</script>
+	
+</div><!--end: topics 文章、评论容器-->
+</div><a name="!comments"></a><div id="blog-comments-placeholder"><div id="comments_pager_top"></div>
+<!--done-->
+<br>
+<div class="feedback_area_title">发表评论</div>
+<div class="feedbackNoItems"></div>
+	
+
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;<span class="comment_actions"><a href="javascript:void(0);" onclick="return ReplyComment(3559053,'MGXGw+iTXGCN6sUdKVK5VULOHE/Lca5LB+CcEarytEqpJLT1YovEQQ==')">回复</a><a href="javascript:void(0);" onclick="return QuoteComment(3559053,'MGXGw+iTXGCN6sUdKVK5VULOHE/Lca5LB+CcEarytEqpJLT1YovEQQ==')">引用</a><a href="javascript:void(0);" onclick="return DelComment(3559053,this)">删除</a></span>
+				</div>
+				<a href="#3559053" class="layer">#1楼</a><a name="3559053" id="comment_anchor_3559053"></a> <span class="comment_date">2016-11-18 09:26</span> | <a id="a_comment_author_3559053" href="http://www.cnblogs.com/jijunjian/" target="_blank">2J</a> <a href="http://msg.cnblogs.com/send/2J" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+			</div>
+			<div class="feedbackCon">
+				<div id="comment_body_3559053" class="blog_comment_body">操作不是很流程，感觉有点卡，好像拖也有些问题哦。</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(3559053,'Digg',this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(3559053,'Bury',this)">反对(0)</a></div><span id="comment_3559053_avatar" style="display:none;">http://pic.cnblogs.com/face/88102/20140604201311.png</span><br>
+			</div>
+		</div>
+	
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;<span class="comment_actions"><a href="javascript:void(0);" onclick="return GetCommentBody(3559062)">修改</a><a href="javascript:void(0);" onclick="return DelComment(3559062,this)">删除</a></span>
+				</div>
+				<a href="#3559062" class="layer">#2楼</a><a name="3559062" id="comment_anchor_3559062"></a>[<span class="louzhu">楼主</span>] <span class="comment_date">2016-11-18 09:37</span> | <a id="a_comment_author_3559062" href="http://www.cnblogs.com/ghost-xyx/" target="_blank">Daryl</a> <a href="http://msg.cnblogs.com/send/Daryl" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+			</div>
+			<div class="feedbackCon">
+				<div id="comment_body_3559062" class="blog_comment_body"><a href="#3559053" title="查看所回复的评论" onclick="commentManager.renderComments(0,50,3559053);">@</a>
+戢俊建<br>PC上吗？这是主要用于移动端的，PC上没怎么处理</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(3559062,'Digg',this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(3559062,'Bury',this)">反对(0)</a></div><span id="comment_3559062_avatar" style="display:none;">http://pic.cnblogs.com/face/613712/20140316134803.png</span><br>
+			</div>
+		</div>
+	
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;<span class="comment_actions"><a href="javascript:void(0);" onclick="return ReplyComment(3559083,'MGXGw+iTXGCN6sUdKVK5VULOHE/Lca5LB+CcEarytEqpJLT1YovEQQ==')">回复</a><a href="javascript:void(0);" onclick="return QuoteComment(3559083,'MGXGw+iTXGCN6sUdKVK5VULOHE/Lca5LB+CcEarytEqpJLT1YovEQQ==')">引用</a><a href="javascript:void(0);" onclick="return DelComment(3559083,this)">删除</a></span>
+				</div>
+				<a href="#3559083" class="layer">#3楼</a><a name="3559083" id="comment_anchor_3559083"></a> <span class="comment_date">2016-11-18 09:56</span> | <a id="a_comment_author_3559083" href="http://www.cnblogs.com/jijunjian/" target="_blank">2J</a> <a href="http://msg.cnblogs.com/send/2J" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+			</div>
+			<div class="feedbackCon">
+				<div id="comment_body_3559083" class="blog_comment_body"><a href="#3559062" title="查看所回复的评论" onclick="commentManager.renderComments(0,50,3559062);">@</a>
+Daryl<br>只用iphone试了下，操作不流畅，就没再用其他手机试了。昨天有一个文章的<a href="http://www.cnblogs.com/iamzhanglei/p/6073016.html" target="_blank">http://www.cnblogs.com/iamzhanglei/p/6073016.html</a> 操作就蛮流畅的。</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(3559083,'Digg',this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(3559083,'Bury',this)">反对(0)</a></div><span id="comment_3559083_avatar" style="display:none;">http://pic.cnblogs.com/face/88102/20140604201311.png</span><br>
+			</div>
+		</div>
+	
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;<span class="comment_actions"><a href="javascript:void(0);" onclick="return GetCommentBody(3559087)">修改</a><a href="javascript:void(0);" onclick="return DelComment(3559087,this)">删除</a></span>
+				</div>
+				<a href="#3559087" class="layer">#4楼</a><a name="3559087" id="comment_anchor_3559087"></a>[<span class="louzhu">楼主</span>] <span class="comment_date">2016-11-18 09:57</span> | <a id="a_comment_author_3559087" href="http://www.cnblogs.com/ghost-xyx/" target="_blank">Daryl</a> <a href="http://msg.cnblogs.com/send/Daryl" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+			</div>
+			<div class="feedbackCon">
+				<div id="comment_body_3559087" class="blog_comment_body"><a href="#3559083" title="查看所回复的评论" onclick="commentManager.renderComments(0,50,3559083);">@</a>
+戢俊建<br>嗯嗯，拖动动画这块做的比较简陋，有空学习优化下。</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(3559087,'Digg',this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(3559087,'Bury',this)">反对(0)</a></div><span id="comment_3559087_avatar" style="display:none;">http://pic.cnblogs.com/face/613712/20140316134803.png</span><br>
+			</div>
+		</div>
+	
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;<span class="comment_actions"><a href="javascript:void(0);" onclick="return GetCommentBody(3559090)">修改</a><a href="javascript:void(0);" onclick="return DelComment(3559090,this)">删除</a></span>
+				</div>
+				<a href="#3559090" class="layer">#5楼</a><a name="3559090" id="comment_anchor_3559090"></a>[<span class="louzhu">楼主</span>] <span class="comment_date">2016-11-18 09:59</span> | <a id="a_comment_author_3559090" href="http://www.cnblogs.com/ghost-xyx/" target="_blank">Daryl</a> <a href="http://msg.cnblogs.com/send/Daryl" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+			</div>
+			<div class="feedbackCon">
+				<div id="comment_body_3559090" class="blog_comment_body"><a href="#3559083" title="查看所回复的评论" onclick="commentManager.renderComments(0,50,3559083);">@</a>
+戢俊建<br>哇，AlloyTeam的东西没法比啊，这个插件本来是我自用的，可以学习下。</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(3559090,'Digg',this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(3559090,'Bury',this)">反对(0)</a></div><span id="comment_3559090_avatar" style="display:none;">http://pic.cnblogs.com/face/613712/20140316134803.png</span><br>
+			</div>
+		</div>
+	
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;<span class="comment_actions"><a href="javascript:void(0);" onclick="return ReplyComment(3559093,'MGXGw+iTXGCN6sUdKVK5VULOHE/Lca5LB+CcEarytEqpJLT1YovEQQ==')">回复</a><a href="javascript:void(0);" onclick="return QuoteComment(3559093,'MGXGw+iTXGCN6sUdKVK5VULOHE/Lca5LB+CcEarytEqpJLT1YovEQQ==')">引用</a><a href="javascript:void(0);" onclick="return DelComment(3559093,this)">删除</a></span>
+				</div>
+				<a href="#3559093" class="layer">#6楼</a><a name="3559093" id="comment_anchor_3559093"></a> <span class="comment_date">2016-11-18 10:00</span> | <a id="a_comment_author_3559093" href="http://www.cnblogs.com/jijunjian/" target="_blank">2J</a> <a href="http://msg.cnblogs.com/send/2J" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+			</div>
+			<div class="feedbackCon">
+				<div id="comment_body_3559093" class="blog_comment_body"><a href="#3559090" title="查看所回复的评论" onclick="commentManager.renderComments(0,50,3559090);">@</a>
+Daryl<br>哈哈，，我就是用了一下，说了下感受哈。</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(3559093,'Digg',this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(3559093,'Bury',this)">反对(0)</a></div><span id="comment_3559093_avatar" style="display:none;">http://pic.cnblogs.com/face/88102/20140604201311.png</span><br>
+			</div>
+		</div>
+	
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;<span class="comment_actions"><a href="javascript:void(0);" onclick="return GetCommentBody(3559095)">修改</a><a href="javascript:void(0);" onclick="return DelComment(3559095,this)">删除</a></span>
+				</div>
+				<a href="#3559095" class="layer">#7楼</a><a name="3559095" id="comment_anchor_3559095"></a>[<span class="louzhu">楼主</span>]<span id="comment-maxId" style="display:none;">3559095</span><span id="comment-maxDate" style="display:none;">2016/11/18 10:01:31</span> <span class="comment_date">2016-11-18 10:01</span> | <a id="a_comment_author_3559095" href="http://www.cnblogs.com/ghost-xyx/" target="_blank">Daryl</a> <a href="http://msg.cnblogs.com/send/Daryl" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+			</div>
+			<div class="feedbackCon">
+				<div id="comment_body_3559095" class="blog_comment_body"><a href="#3559093" title="查看所回复的评论" onclick="commentManager.renderComments(0,50,3559093);">@</a>
+戢俊建<br>多谢反馈</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(3559095,'Digg',this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(3559095,'Bury',this)">反对(0)</a></div><span id="comment_3559095_avatar" style="display:none;">http://pic.cnblogs.com/face/613712/20140316134803.png</span><br>
+			</div>
+		</div>
+	<div id="comments_pager_bottom"></div></div><script type="text/javascript">var commentManager = new blogCommentManager();commentManager.renderComments(0);</script>
+<div id="comment_form" class="commentform">
+<a name="commentform"></a>
+<div id="divCommentShow"></div>
+<div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="#" onclick="return RefreshPage();">刷新页面</a><a href="#top">返回顶部</a></div>
+<div id="comment_form_container">
+<div id="commentform_title">发表评论</div>
+<span id="tip_comment" style="color:Red"></span>
+<p>
+昵称：<input type="text" id="tbCommentAuthor" class="author" disabled="disabled" size="50" value="Daryl">
+</p>
+<div class="commentbox_main">
+<div class="commentbox_title">
+<div class="commentbox_title_left">评论内容：</div>
+<div class="commentbox_title_right">
+<img id="ubb_quote" class="comment_icon" src="http://static.cnblogs.com/images/ubb/quote.gif" alt="引用" title="添加引用" onclick="insertUBB('tbCommentBody','quote')">
+<img id="ubb_bold" class="comment_icon" src="http://static.cnblogs.com/images/ubb/b.png" alt="粗体" title="添加粗体" onclick="insertUBB('tbCommentBody','b')">
+<img id="ubb_url" class="comment_icon" src="http://static.cnblogs.com/images/ubb/lk.png" alt="链接" title="添加链接" onclick="insertUbbUrl('tbCommentBody')">
+<img id="ubb_indent" class="comment_icon" src="http://static.cnblogs.com/images/ubb/indent.png" alt="缩进" title="添加首行缩进" onclick="insertIndent('tbCommentBody')">
+<img id="ubb_code" class="comment_icon" src="http://static.cnblogs.com/images/ubb/InsertCode.gif" alt="代码" title="添加代码" onclick="insertUbbCode()">
+<img id="ubb_img" class="comment_icon" src="http://static.cnblogs.com/images/ubb/img.gif" alt="图片" title="上传图片" onclick="OpenImageUploadWindow();">
+</div>
+</div>
+<div class="clear"></div>
+<textarea id="tbCommentBody" class="comment_textarea"></textarea>
+</div>
+<p id="commentbox_opt">
+<input id="btn_comment_submit" type="button" class="comment_btn" value="提交评论">
+<span id="span_comment_canceledit" style="display:none"><a href="javascript:void(0);" onclick="return CancelCommentEdit()">不改了</a></span>
+<a href="javascript:void(0);" onclick="return logout();">退出</a>
+</p>
+<div id="tip_comment2" style="color:Red"></div>
+<p>
+[Ctrl+Enter快捷键提交]
+</p>
+<div style="display:none">
+<span id="comment_edit_id"></span><span id="span_parentcomment_id"></span>
+<span id="span_parent_id"></span>
+<span id="span_comment_replyto"></span>
+<span id="span_comment_posted"></span>
+</div>
+</div>
+<div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+<div id="ad_t2"><a href="http://www.ucancode.com/index.htm" target="_blank">【推荐】50万行VC++源码: 大型组态工控、电力仿真CAD与GIS源码库</a><br><a href="https://cloud.tencent.com/developer/labs?fromSource=gwzcw.241259.241259.241259" target="_blank">【免费】从零开始学编程，开发者专属实验平台免费实践！</a><br></div>
+<div id="opt_under_post"></div>
+<div id="cnblogs_c1" class="c_ad_block"><a href="https://cn.udacity.com/course/front-end-web-developer-nanodegree--nd001-cn-advanced/?utm_source=cnblogs&amp;utm_medium=referral&amp;utm_campaign=FEND04" target="_blank"><img width="300" height="250" src="https://images2015.cnblogs.com/news/24442/201706/24442-20170629184920789-1740545267.png" alt="Udacity_前端_06290712"></a></div>
+<div id="under_post_news"><div class="itnews c_ad_block"><b>最新IT新闻</b>:<br> ·  <a href="http://news.cnblogs.com/n/573062/" target="_blank">Instagram整治平台环境：限制垃圾评论</a><br> ·  <a href="http://news.cnblogs.com/n/573061/" target="_blank">顺丰彩票今日开卖：返奖率65% 最高百万</a><br> ·  <a href="http://news.cnblogs.com/n/573060/" target="_blank">《王者荣耀》最严防沉迷正式实施：玩1小时界面变这样</a><br> ·  <a href="http://news.cnblogs.com/n/573059/" target="_blank">富士康投资50亿美元在印度建厂 加快本地制造步伐</a><br> ·  <a href="http://news.cnblogs.com/n/573058/" target="_blank">第一代Windows 10别再用了 微软宣布停服</a><br>» <a href="http://news.cnblogs.com/" title="IT新闻" target="_blank">更多新闻...</a></div></div>
+<div id="cnblogs_c2" class="c_ad_block"><a href="https://www.jiguang.cn/devservice?source=bky" target="_blank"><img width="468" height="60" src="https://images2015.cnblogs.com/news/24442/201706/24442-20170629165247758-2056260207.png" alt="极光推广_0701"></a></div>
+<div id="under_post_kb"><div class="itnews c_ad_block" id="kb_block"><b>最新知识库文章</b>:<br><div id="kb_recent"> ·  <a href="http://kb.cnblogs.com/page/570194/" target="_blank">小printf的故事：什么是真正的程序员？</a><br> ·  <a href="http://kb.cnblogs.com/page/569992/" target="_blank">程序员的工作、学习与绩效</a><br> ·  <a href="http://kb.cnblogs.com/page/569056/" target="_blank">软件开发为什么很难</a><br> ·  <a href="http://kb.cnblogs.com/page/565901/" target="_blank">唱吧DevOps的落地，微服务CI/CD的范本技术解读</a><br> ·  <a href="http://kb.cnblogs.com/page/566523/" target="_blank">程序员，如何从平庸走向理想？</a><br></div>» <a href="http://kb.cnblogs.com/" target="_blank">更多知识库文章...</a></div></div>
+<div id="HistoryToday" class="c_ad_block"></div>
+<script type="text/javascript">
+    fixPostBody();
+    setTimeout(function () { incrementViewCount(cb_entryId); }, 50);
+    deliverAdT2();
+    deliverAdC1();
+    deliverAdC2();    
+    loadNewsAndKb();
+    loadBlogSignature();
+    LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+    GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate);
+    loadOptUnderPost();
+    GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);   
+</script>
+</div>
+
+
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			
+<!--done-->
+<div class="newsItem">
+<h3 class="catListTitle">公告</h3>
+	<div id="blog-news"><div id="profile_block">昵称：<a href="http://home.cnblogs.com/u/ghost-xyx/">Daryl</a><br>园龄：<a href="http://home.cnblogs.com/u/ghost-xyx/" title="入园时间：2014-03-16">3年3个月</a><br>粉丝：<a href="http://home.cnblogs.com/u/ghost-xyx/followers/">125</a><br>关注：<a href="http://home.cnblogs.com/u/ghost-xyx/followees/">15</a><div id="p_b_follow"></div></div></div><script type="text/javascript">loadBlogNews();</script>
+</div>
+
+			<div id="calendar"><div id="blog-calendar" style=""><table id="blogCalendar" class="Cal" cellspacing="0" cellpadding="0" title="日历">
+	<tbody><tr><td colspan="7"><table class="CalTitle" cellspacing="0">
+		<tbody><tr><td class="CalNextPrev"><a href="javascript:void(0);" onclick="loadBlogCalendar('2017/06/01');return false;">&lt;</a></td><td align="center">2017年7月</td><td class="CalNextPrev" align="right"><a href="javascript:void(0);" onclick="loadBlogCalendar('2017/08/01');return false;">&gt;</a></td></tr>
+	</tbody></table></td></tr><tr><th class="CalDayHeader" align="center" abbr="日" scope="col">日</th><th class="CalDayHeader" align="center" abbr="一" scope="col">一</th><th class="CalDayHeader" align="center" abbr="二" scope="col">二</th><th class="CalDayHeader" align="center" abbr="三" scope="col">三</th><th class="CalDayHeader" align="center" abbr="四" scope="col">四</th><th class="CalDayHeader" align="center" abbr="五" scope="col">五</th><th class="CalDayHeader" align="center" abbr="六" scope="col">六</th></tr><tr><td class="CalOtherMonthDay" align="center">25</td><td class="CalOtherMonthDay" align="center">26</td><td class="CalOtherMonthDay" align="center">27</td><td class="CalOtherMonthDay" align="center">28</td><td class="CalOtherMonthDay" align="center">29</td><td class="CalOtherMonthDay" align="center">30</td><td class="CalWeekendDay" align="center">1</td></tr><tr><td class="CalWeekendDay" align="center">2</td><td align="center">3</td><td class="CalTodayDay" align="center">4</td><td align="center">5</td><td align="center">6</td><td align="center">7</td><td class="CalWeekendDay" align="center">8</td></tr><tr><td class="CalWeekendDay" align="center">9</td><td align="center">10</td><td align="center">11</td><td align="center">12</td><td align="center">13</td><td align="center">14</td><td class="CalWeekendDay" align="center">15</td></tr><tr><td class="CalWeekendDay" align="center">16</td><td align="center">17</td><td align="center">18</td><td align="center">19</td><td align="center">20</td><td align="center">21</td><td class="CalWeekendDay" align="center">22</td></tr><tr><td class="CalWeekendDay" align="center">23</td><td align="center">24</td><td align="center">25</td><td align="center">26</td><td align="center">27</td><td align="center">28</td><td class="CalWeekendDay" align="center">29</td></tr><tr><td class="CalWeekendDay" align="center">30</td><td align="center">31</td><td class="CalOtherMonthDay" align="center">1</td><td class="CalOtherMonthDay" align="center">2</td><td class="CalOtherMonthDay" align="center">3</td><td class="CalOtherMonthDay" align="center">4</td><td class="CalOtherMonthDay" align="center">5</td></tr>
+</tbody></table></div><script type="text/javascript">loadBlogDefaultCalendar();</script></div>
+			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"><div id="sidebar_search" class="sidebar-block">
+<div id="sidebar_search" class="mySearch">
+<h3 class="catListTitle">搜索</h3>
+<div id="sidebar_search_box">
+<div id="widget_my_zzk" class="div_my_zzk"><input type="text" id="q" onkeydown="return zzk_go_enter(event);" class="input_my_zzk">&nbsp;<input onclick="zzk_go()" type="button" value="找找看" id="btnZzk" class="btn_my_zzk"></div>
+<div id="widget_my_google" class="div_my_zzk"><input type="text" name="google_q" id="google_q" onkeydown="return google_go_enter(event)" class="input_my_zzk">&nbsp;<input onclick="google_go()" type="button" value="谷歌搜索" class="btn_my_zzk"></div>
+</div>
+</div>
+
+</div><div id="sidebar_shortcut" class="sidebar-block">
+<div class="catListLink">
+<h3 class="catListTitle">常用链接</h3>
+<ul>
+<li><a href="http://www.cnblogs.com/ghost-xyx/p/" title="我的博客的随笔列表">我的随笔</a></li><li><a href="http://www.cnblogs.com/ghost-xyx/MyComments.html" title="我发表过的评论列表">我的评论</a></li><li><a href="http://www.cnblogs.com/ghost-xyx/OtherPosts.html" title="我评论过的随笔列表">我的参与</a></li><li><a href="http://www.cnblogs.com/ghost-xyx/RecentComments.html" title="我的博客的评论列表">最新评论</a></li><li><a href="http://www.cnblogs.com/ghost-xyx/tag/" title="我的博客的标签列表">我的标签</a></li>
+<li><a id="itemListLink" onclick="this.blur();WarpClass('itemListLink', 'itemListLin_con');return false;" href="#">更多链接</a></li>
+</ul>
+<div id="itemListLin_con" style="display:none;">
+<ul>
+
+</ul>
+</div>
+</div></div><div id="sidebar_toptags" class="sidebar-block">
+<div class="catListTag">
+<h3 class="catListTitle">我的标签</h3>
+<ul>
+<li><a href="http://www.cnblogs.com/ghost-xyx/tag/JavaScript/">JavaScript</a>(6)</li><li><a href="http://www.cnblogs.com/ghost-xyx/tag/CSS/">CSS</a>(4)</li><li><a href="http://www.cnblogs.com/ghost-xyx/tag/CSS3/">CSS3</a>(4)</li><li><a href="http://www.cnblogs.com/ghost-xyx/tag/MySQL/">MySQL</a>(4)</li><li><a href="http://www.cnblogs.com/ghost-xyx/tag/HTML5/">HTML5</a>(3)</li><li><a href="http://www.cnblogs.com/ghost-xyx/tag/webpack/">webpack</a>(3)</li><li><a href="http://www.cnblogs.com/ghost-xyx/tag/Vuex/">Vuex</a>(2)</li><li><a href="http://www.cnblogs.com/ghost-xyx/tag/ReactJS/">ReactJS</a>(2)</li><li><a href="http://www.cnblogs.com/ghost-xyx/tag/HTML/">HTML</a>(2)</li><li><a href="http://www.cnblogs.com/ghost-xyx/tag/jquery/">jquery</a>(2)</li><li><a href="http://www.cnblogs.com/ghost-xyx/tag/">更多</a></li>
+</ul>
+</div></div><div id="sidebar_categories">
+<div class="catListPostArchive">
+<h3 class="catListTitle">随笔档案</h3>
+
+<ul>
+
+<li><a id="CatList_LinkList_0_Link_0" href="http://www.cnblogs.com/ghost-xyx/archive/2017/06.html">2017年6月 (1)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_1" href="http://www.cnblogs.com/ghost-xyx/archive/2017/02.html">2017年2月 (4)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_2" href="http://www.cnblogs.com/ghost-xyx/archive/2016/11.html">2016年11月 (2)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_3" href="http://www.cnblogs.com/ghost-xyx/archive/2016/08.html">2016年8月 (1)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_4" href="http://www.cnblogs.com/ghost-xyx/archive/2016/07.html">2016年7月 (2)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_5" href="http://www.cnblogs.com/ghost-xyx/archive/2016/06.html">2016年6月 (2)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_6" href="http://www.cnblogs.com/ghost-xyx/archive/2016/05.html">2016年5月 (1)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_7" href="http://www.cnblogs.com/ghost-xyx/archive/2016/03.html">2016年3月 (3)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_8" href="http://www.cnblogs.com/ghost-xyx/archive/2015/12.html">2015年12月 (1)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_9" href="http://www.cnblogs.com/ghost-xyx/archive/2015/10.html">2015年10月 (1)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_10" href="http://www.cnblogs.com/ghost-xyx/archive/2015/04.html">2015年4月 (2)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_11" href="http://www.cnblogs.com/ghost-xyx/archive/2014/11.html">2014年11月 (1)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_12" href="http://www.cnblogs.com/ghost-xyx/archive/2014/07.html">2014年7月 (5)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_13" href="http://www.cnblogs.com/ghost-xyx/archive/2014/06.html">2014年6月 (9)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_14" href="http://www.cnblogs.com/ghost-xyx/archive/2014/04.html">2014年4月 (1)</a> </li>
+
+</ul>
+
+</div>
+
+<div class="catListImageCategory">
+<h3 class="catListTitle">相册</h3>
+
+<ul>
+
+<li><a id="CatList_LinkList_1_Link_0" href="http://www.cnblogs.com/ghost-xyx/gallery/1028040.html" rel="nofollow">Source(1)</a> </li>
+
+</ul>
+
+</div>
+
+</div><div id="sidebar_recentcomments" class="sidebar-block"><div id="recent_comments_wrap">
+<div class="catListComment">
+<h3 class="catListTitle">最新评论</h3>
+
+	<div id="RecentCommentsBlock"><ul>
+        <li class="recent_comment_title"><a href="http://www.cnblogs.com/ghost-xyx/p/3788438.html#3725922">1. Re:教你做炫酷的蜂巢式图片墙</a></li>
+        <li class="recent_comment_body">@xingye91噗。。。。...</li>
+        <li class="recent_comment_author">--Daryl</li>
+        <li class="recent_comment_title"><a href="http://www.cnblogs.com/ghost-xyx/p/3788438.html#3725919">2. Re:教你做炫酷的蜂巢式图片墙</a></li>
+        <li class="recent_comment_body">大大赛高！</li>
+        <li class="recent_comment_author">--xingye91</li>
+        <li class="recent_comment_title"><a href="http://www.cnblogs.com/ghost-xyx/p/7060070.html#3721536">3. Re:使用 Socket.IO 开发聊天室</a></li>
+        <li class="recent_comment_body">@铁锅盖多谢支持...</li>
+        <li class="recent_comment_author">--Daryl</li>
+        <li class="recent_comment_title"><a href="http://www.cnblogs.com/ghost-xyx/p/7060070.html#3721535">4. Re:使用 Socket.IO 开发聊天室</a></li>
+        <li class="recent_comment_body">@大~熊多谢支持...</li>
+        <li class="recent_comment_author">--Daryl</li>
+        <li class="recent_comment_title"><a href="http://www.cnblogs.com/ghost-xyx/p/7060070.html#3721501">5. Re:使用 Socket.IO 开发聊天室</a></li>
+        <li class="recent_comment_body">不错哦，以前用这个做了个填表小应用，今天见你的文章又复习了一下</li>
+        <li class="recent_comment_author">--大~熊</li>
+</ul>
+</div>
+</div>
+</div></div><div id="sidebar_topviewedposts" class="sidebar-block"><div id="topview_posts_wrap">
+<div class="catListView">
+<h3 class="catListTitle">阅读排行榜</h3>
+	<div id="TopViewPostsBlock"><ul><li><a href="http://www.cnblogs.com/ghost-xyx/p/5812902.html">1. webpack踩坑之路 (2)——图片的路径与打包(19097)</a></li><li><a href="http://www.cnblogs.com/ghost-xyx/p/3763669.html">2. CSS中伪类及伪元素用法详解(7943)</a></li><li><a href="http://www.cnblogs.com/ghost-xyx/p/3811036.html">3. SQL语句汇总（三）——聚合函数、分组、子查询及组合查询(4879)</a></li><li><a href="http://www.cnblogs.com/ghost-xyx/p/4035615.html">4. JavaScript——历史与简介(4190)</a></li><li><a href="http://www.cnblogs.com/ghost-xyx/p/3798362.html">5. SQL语句汇总（二）——数据修改、数据查询(4086)</a></li></ul></div>
+</div>
+</div></div><div id="sidebar_topcommentedposts" class="sidebar-block"><div id="topfeedback_posts_wrap">
+<div class="catListFeedback">
+<h3 class="catListTitle">评论排行榜</h3>
+	<div id="TopFeedbackPostsBlock"><ul><li><a href="http://www.cnblogs.com/ghost-xyx/p/5677168.html">1. CSS技巧收集——毛玻璃效果(17)</a></li><li><a href="http://www.cnblogs.com/ghost-xyx/p/3830528.html">2. HTML5新增核心工具——canvas(15)</a></li><li><a href="http://www.cnblogs.com/ghost-xyx/p/5253567.html">3. ReactJS实用技巧（2）：从新人大坑——表单组件来看State(14)</a></li><li><a href="http://www.cnblogs.com/ghost-xyx/p/3788438.html">4. 教你做炫酷的蜂巢式图片墙(14)</a></li><li><a href="http://www.cnblogs.com/ghost-xyx/p/4035615.html">5. JavaScript——历史与简介(12)</a></li></ul></div>
+</div>
+</div></div><div id="sidebar_topdiggedposts" class="sidebar-block"><div id="topdigg_posts_wrap">
+<h3 class="catListTitle">推荐排行榜</h3>
+<div class="RecentComment">
+	<div id="TopDiggPostsBlock"><ul><li><a href="http://www.cnblogs.com/ghost-xyx/p/3788438.html">1. 教你做炫酷的蜂巢式图片墙(19)</a></li><li><a href="http://www.cnblogs.com/ghost-xyx/p/6407169.html">2. 做一个360度看车的效果玩玩（web）(11)</a></li><li><a href="http://www.cnblogs.com/ghost-xyx/p/5677168.html">3. CSS技巧收集——毛玻璃效果(10)</a></li><li><a href="http://www.cnblogs.com/ghost-xyx/p/3833179.html">4. 如何实现Canvas图像的拖拽、点击等操作(9)</a></li><li><a href="http://www.cnblogs.com/ghost-xyx/p/3830528.html">5. HTML5新增核心工具——canvas(9)</a></li></ul></div>
+</div></div></div></div><script type="text/javascript">loadBlogSideColumn();</script>
+			</div>
+			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		
+<!--done-->
+Copyright ©2017 Daryl
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+<!--PageEndHtml Block Begin-->
+<div id="customFooter">
+		<h1 class="footer-title">Contact with me</h1>
+		<ul>
+			<li>
+				<a>E-mail</a>
+			</li>
+			<li>
+				<a>Wechat</a>
+			</li>			
+			<li>
+				<a href="https://github.com/Darylxyx" target="_blank">GitHub</a>
+			</li>
+		</ul>
+		<p id="copyright">Copyright ©2017 Daryl</p>
+	</div>
+<!--PageEndHtml Block End-->
+
+
 </body>
 </html>

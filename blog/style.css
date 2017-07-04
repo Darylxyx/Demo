@@ -6,7 +6,7 @@ html, body, div, h1, h2, h3, h4, h5, h6, p, span, img, input, ul, ol, li {
 }
 
 html, body {
-	font-family: 'Helvetica Neue';
+	font-family: '微软雅黑', Helvetica;
 	background-color: #f8f8f8;
 }
 
@@ -14,9 +14,9 @@ ul, ol {
 	list-style-type: none;
 }
 
-a {
+/*a {
 	text-decoration: none;
-}
+}*/
 
 /*header*/
 
@@ -43,6 +43,8 @@ a {
 	color: #fff;
 	font-size: 64px;
 	line-height: 1;
+	text-decoration: none;
+	font-weight: bold;
 }
 
 #Header1_HeaderTitle::after {
@@ -52,13 +54,14 @@ a {
 }
 
 #blogTitle h2 {
+	font-weight: 100;
 	font-size: 36px;
-	color: #fff;
+	color: #b8b8b8;
 	margin-top: 6px;
 }
 
 #blogTitle h2::after {
-	content: 'Fucking the Damn World';
+	content: 'Thoughts, stories and ideas';
 }
 
 #navigator {
@@ -83,6 +86,7 @@ a {
 
 #navList li a {
 	color: #B8B8B8;
+	text-decoration: none;
 }
 
 #navList li a:hover, #navList li a:active {
@@ -125,19 +129,24 @@ a {
 	padding: 60px 0 70px 0;
 }
 
+#homepage_top_pager {
+	display: none;
+}
+
 .day {
 	margin-bottom: 40px;
 	border-bottom: 1px solid #ccc;
 }
 
 .postTitle {
-	font-size: 34px;
+	font-size: 32px;
 	margin-bottom: 24px;
 	line-height: 1;
 }
 
 .postTitle a {
 	color: #4a4a4a;
+	text-decoration: none;
 }
 
 .c_b_p_desc {
@@ -148,6 +157,8 @@ a {
 
 .c_b_p_desc_readmore {
 	color: #3BAEE7;
+	text-decoration: none;
+	margin-left: 10px;
 }
 
 .postDesc {
@@ -159,11 +170,24 @@ a {
 .postDesc a {
 	color: #3BAEE7;
 	margin-left: 10px;
+	text-decoration: none;
 }
 
 .dayTitle {
 	display: none;
 }
+
+.topicListFooter, #homepage1_HomePageDays_homepage_bottom_pager {
+	text-align: right;
+	color: #4a4a4a;
+}
+
+.topicListFooter a, #homepage1_HomePageDays_homepage_bottom_pager a {
+	/*text-decoration: none;*/
+	color: #4a4a4a;
+}
+
+
 
 /*sideBar*/
 
@@ -189,6 +213,7 @@ a {
 	color: #fff;
 	line-height: 1;
 	margin: 36px 0 52px 0;
+	font-weight: 600;
 }
 
 #customFooter ul {
@@ -203,6 +228,7 @@ a {
 #customFooter ul a {
 	color: #c8c8c8;
 	font-size: 24px;
+	text-decoration: none;
 }
 
 #copyright {
