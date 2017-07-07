@@ -285,7 +285,7 @@ ul, ol {
 }
 
 #comment_form {
-	padding-bottom: 40px;
+	padding: 40px 0 60px 0;
 }
 
 #blog-comments-placeholder {
@@ -369,6 +369,42 @@ ul, ol {
 
 #commentbox_opt {
 	display: block !important;
+	float: right;
+}
+
+#commentbox_opt a {
+	color: #3BAEE7;
+	text-decoration: none;
+	font-size: 16px;
+}
+
+#btn_comment_submit {
+	width: 102px;
+	height: 24px;
+	font-size: 14px;
+	color: #fff;
+	line-height: 24px;
+	border-radius: 12px;
+	border: 0;
+	outline: 0;
+	background-color: #3BAEE7;
+	text-align: center;
+	cursor: pointer;
+}
+
+.commentbox_title {
+	width: 100%;
+	overflow: hidden;
+	margin-bottom: 10px;
+}
+
+.commentbox_title_left {
+	font-size: 16px;
+	color: #4a4a4a;
+}
+
+#div_digg {
+	margin-top: 20px;
 }
 
 /*adver*/
