@@ -363,6 +363,8 @@ ul, ol {
 	height: 100px;
 	border: 1px solid #C6DEEA;
 	border-radius: 8px;
+	outline: 0;
+	padding: 6px 10px;
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;
 }
