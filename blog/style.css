@@ -61,7 +61,7 @@ ul, ol {
 }
 
 #blogTitle h2::after {
-	content: 'Thoughts, stories and ideas';
+	content: 'This demand can not be done :)';
 }
 
 #navigator {
@@ -208,7 +208,7 @@ ul, ol {
 
 .pager a {
 	color: #3BAEE7 !important;
-	/*margin: 0 4px;*/
+	margin: 0 3px;
 	border-color: #3BAEE7;
 }
 
@@ -267,6 +267,13 @@ ul, ol {
 /*page*/
 #blog_post_info_block {
 	position: relative;
+	padding-bottom: 30px;
+	border-bottom: 1px solid #ccc;
+	margin-top: 40px;
+}
+
+.post .postDesc {
+	margin: 18px 0 40px 0 !important;
 }
 
 .author_avatar {
@@ -291,6 +298,7 @@ ul, ol {
 	color: #4a4a4a;
 	font-size: 18px;
 	text-decoration: none;
+	font-weight: lighter;
 }
 
 #author_profile_detail a:first-child {
@@ -300,7 +308,7 @@ ul, ol {
 	line-height: 1;
 }
 
-#BlogPostCategory, #post_next_prev, #EntryTag, #green_channel_digg, #green_channel_favorite, #green_channel_weibo, #green_channel_wechat {
+#BlogPostCategory, #post_next_prev, #EntryTag, #green_channel_digg, #green_channel_favorite, #green_channel_weibo, #green_channel_wechat, #author_profile_follow {
 	display: none !important;
 }
 
@@ -320,15 +328,21 @@ ul, ol {
 	width: 173px;
 	height: 32px;
 	line-height: 32px;
-	font-size: 16px;
+	font-size: 14px;
 	color: #fff;
 	text-align: center;
+	background-image: none !important;
 	background-color: #4A4A4A !important;
 	border: 0;
 	outline: 0;
 	border-radius: 16px !important;
-	box-shadow: none;
-	text-shadow: none;
+	-webkit-box-shadow: none !important;
+	-moz-box-shadow: none !important;
+	-ms-box-shadow: none !important;
+	-o-box-shadow: none !important;
+	box-shadow: none !important;
+	text-shadow: none !important;
+	font-weight: normal !important;
 }
 
 #green_channel_follow:hover {
@@ -478,7 +492,7 @@ ul, ol {
 }
 
 #div_digg {
-	margin-top: 20px;
+	margin-top: 30px;
 }
 
 /*adver*/
