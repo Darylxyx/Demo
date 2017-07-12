@@ -299,6 +299,7 @@ ul, ol {
 	font-size: 18px;
 	text-decoration: none;
 	font-weight: lighter;
+	margin-right: 10px;
 }
 
 #author_profile_detail a:first-child {
