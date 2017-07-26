@@ -15,7 +15,7 @@ window.onload = function() {
     	this.conW = 800; //画布宽/高
     	this.conH = 450;
 
-    	this.dw = 25; //画面单元宽/高
+    	this.dw = 25; //画布单元宽/高
     	this.dh = 25;
 
     	this.I = this.conH / this.dh; //单元行/列数
@@ -58,7 +58,7 @@ window.onload = function() {
 
     		for (var i = 0; i < this.I; i ++) {
     			for (var j = 0; j < this.J; j ++) {
-    				this.ctx.drawImage(this.imgList[this.imgIndex], this.DW*j, this.DH*i, this.DW, this.DH, this.dw*j, this.dh*i, this.dw, this.dh);
+                    this.handleDraw(this.imgList[this.imgIndex], i, j);
     			}
     		}
 
@@ -84,7 +84,8 @@ window.onload = function() {
 	    			var resArr = _this.countAround(i, j, dst);
 
 	    			resArr.forEach(function(item, index) {
-	    				_this.handleDraw(app.imgList[_this.imgIndex], item.x, item.y);
+                        _this.handleClear(item.x, item.y);
+	    				_this.handleDraw(_this.imgList[_this.imgIndex], item.x, item.y);
 	    			});
 	    			
 	    			if (!resArr.length) {
@@ -114,7 +115,6 @@ window.onload = function() {
         autoPlay() {
             var _this = this;
             this.autoPlayObj = setInterval(function() {
-                // console.log(Math.floor(Math.random()*_this.imgList.length));
                 var randomIndex = Math.floor(Math.random()*_this.randomPoint.length),
                     point = _this.randomPoint[randomIndex];
                 // console.log(point);
@@ -122,15 +122,13 @@ window.onload = function() {
             }, 3000);
         },
 
-    	handleDraw(nextImg, i, j) { //负责绘制，nextImg: 下张图片；i: 单元行号；j: 单元列号
-    		var _this = this,
-    			actH = this.dh,
-    			turnFlag = false;
-
-    			this.ctx.clearRect(this.dw*j, this.dh*i, this.dw, this.dh);
-
-    			this.ctx.drawImage(this.imgList[this.imgIndex], this.DW*j, this.DH*i, this.DW, this.DH, this.dw*j, this.dh*i, this.dw, actH);
+    	handleDraw(img, i, j) { //负责绘制，i: 单元行号；j: 单元列号
+    			this.ctx.drawImage(img, this.DW*j, this.DH*i, this.DW, this.DH, this.dw*j, this.dh*i, this.dw, this.dh);
     	},
+
+        handleClear(i, j) {
+            this.ctx.clearRect(this.dw*j, this.dh*i, this.dw, this.dh);
+        },
 
     	countAround(i, j, dst) {
     		// console.log(i, j);
