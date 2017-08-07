@@ -9,8 +9,8 @@ window.onload = function() {
     	this.isAnimating = false;
         this.autoPlayObj = null;
 
-    	this.imgW = 1920; //图片原始宽/高
-    	this.imgH = 1080;
+    	this.imgW = 800; //图片原始宽/高
+    	this.imgH = 450;
 
     	this.conW = 800; //画布宽/高
     	this.conH = 450;
