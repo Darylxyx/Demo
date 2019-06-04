@@ -12,5 +12,5 @@ newmtl Model_9_Model_9_Albedo_2Material
 	Kd 0.8000 0.8000 0.8000
 	Ks 0.0000 0.0000 0.0000
 	Ke 0.0000 0.0000 0.0000
-	map_Ka fan.jpg
-	map_Kd fan.jpg
+	map_Ka fan.jpeg
+	map_Kd fan.jpeg
