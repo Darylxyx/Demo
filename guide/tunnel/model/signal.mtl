@@ -1,0 +1,16 @@
+# 3ds Max Wavefront OBJ Exporter v0.97b - (c)2007 guruware
+# 创建的文件:06.06.2019 18:38:51
+
+newmtl Model_7_Model_7_Albedo_2Material
+	Ns 1.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.0000 0.0000 0.0000
+	Kd 0.8000 0.8000 0.8000
+	Ks 0.0000 0.0000 0.0000
+	Ke 0.0000 0.0000 0.0000
+	map_Ka map\signal.jpg
+	map_Kd map\signal.jpg
